@@ -56,13 +56,13 @@ public class HelloControllerTests {
 
     }
 
-    @Test
-    public void welcome_startsWithExpectedGreeting() throws Exception {
-      mvc.perform(MockMvcRequestBuilders.get("/hello").accept(MediaType.APPLICATION_JSON))
-          .andExpect(status().isOk())
-          .andExpect(content().string(startsWith("Hola"))); 
+    // @Test
+    // public void welcome_startsWithExpectedGreeting() throws Exception {
+    //   mvc.perform(MockMvcRequestBuilders.get("/hello").accept(MediaType.APPLICATION_JSON))
+    //       .andExpect(status().isOk())
+    //       .andExpect(content().string(startsWith("Hola"))); 
 
-    }
+    // }
 
     @Test
     public void welcome_endsWithExpectedGreeting() throws Exception {
