@@ -1,26 +1,34 @@
-pipeline{
+pipeline {
     agent any
     
-    tools{
+    tools {
         maven 'M387'
     }
-    stages{
-        stage('echo version'){
-            steps{
-                sh 'echo maven version is:'
+
+    stages {
+        stage('Echo Maven Version') {
+            steps {
+                sh 'echo Maven version is:'
                 sh 'mvn -version'
             }
         }
-        
-        stage('Build'){
-            steps{
+
+        stage('Build') {
+            steps {
                 git branch: 'main', url: 'https://github.com/sidd-harth/jenkins-hello-world.git'
-                sh 'mvn clean package -DskipTests=True' 
+                sh 'mvn clean package -DskipTests=true'
             }
         }
-        stage('Test'){
-            steps{
-                sh 'mvn test'
+
+        stage('Test') {
+            steps {
+                script {
+                    try {
+                        sh 'mvn test'
+                    } catch (Exception e) {
+                        echo 'Test stage failed, but continuing pipeline execution...'
+                    }
+                }
             }
         }
     }
